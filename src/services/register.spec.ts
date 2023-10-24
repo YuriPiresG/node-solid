@@ -1,4 +1,4 @@
-import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
+import {InMemoryUsersRepository} from "@/repositories/in-memory/in-memory-users-repository";
 import { UserAlreadyExistsError } from "@/services/errors/user-already-exists-error";
 import { compare } from "bcryptjs";
 import { expect, describe, it } from "vitest";
@@ -55,6 +55,6 @@ describe("Register Use Case", () => {
         email,
         password: "123456",
       })
-    ).rejects.toEqual(new UserAlreadyExistsError());
+    ).rejects.toBeInstanceOf(UserAlreadyExistsError);
   });
 });
