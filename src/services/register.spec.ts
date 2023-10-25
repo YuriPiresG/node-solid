@@ -8,7 +8,7 @@ describe("Register Use Case", () => {
   it("should register", async () => {
     const usersRepository = new InMemoryUsersRepository();
     const registerService = new RegisterService(usersRepository);
-    console.log(usersRepository.items);
+   
 
     const { user } = await registerService.execute({
       name: "John Doe",
