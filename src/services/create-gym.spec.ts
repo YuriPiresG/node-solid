@@ -3,7 +3,7 @@ import { UserAlreadyExistsError } from "@/services/errors/user-already-exists-er
 import { compare } from "bcryptjs";
 import { expect, describe, it, beforeEach } from "vitest";
 import { RegisterService } from "./register.service";
-import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository copy";
+import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
 import { CreateGymService } from "./create-gym.service";
 
 let gymRepository: InMemoryGymsRepository;
