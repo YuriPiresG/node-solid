@@ -1,9 +1,5 @@
-import { InMemoryUsersRepository } from "@/repositories/in-memory/in-memory-users-repository";
-import { UserAlreadyExistsError } from "@/services/errors/user-already-exists-error";
-import { compare } from "bcryptjs";
-import { expect, describe, it, beforeEach } from "vitest";
-import { RegisterService } from "./register.service";
 import { InMemoryGymsRepository } from "@/repositories/in-memory/in-memory-gyms-repository";
+import { beforeEach, describe, it } from "vitest";
 import { CreateGymService } from "./create-gym.service";
 
 let gymRepository: InMemoryGymsRepository;
