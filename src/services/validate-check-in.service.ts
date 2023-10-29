@@ -1,10 +1,8 @@
 import { CheckInsRepository } from "@/repositories/check-ins-repository";
-import { GymsRepository } from "@/repositories/gyms-repository";
 import { CheckIn } from "@prisma/client";
+import dayjs from "dayjs";
+import { ExpiredValidationError } from "./errors/expired-validation-error";
 import { ResourceNotFound } from "./errors/resource-not-found-error";
-import { getDistanceBetweenCoordinates } from "@/utils/get-distance-between-coordinates";
-import { MaxNumberOfCheckInsError } from "./errors/max-number-of-check-ins-error";
-import { MaxDistanceError } from "./errors/max-distance-error";
 
 interface ValidateCheckInServiceRequest {
   checkInId: string;
@@ -23,6 +21,14 @@ export class ValidateCheckInService {
     const checkIn = await this.checkInsRepository.findById(checkInId);
 
     if (!checkIn) throw new ResourceNotFound();
+
+    const distanceInMinutesFromCheckInCreation = dayjs(new Date()).diff(
+      checkIn.created_at,
+      "minute"
+    );
+
+    if (distanceInMinutesFromCheckInCreation > 20)
+      throw new ExpiredValidationError();
 
     checkIn.validated_at = new Date();
 
